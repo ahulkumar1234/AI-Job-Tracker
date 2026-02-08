@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { CiLocationOn } from "react-icons/ci";
 import { FaRegClock } from "react-icons/fa";
 
 const Application = () => {
+  const BASE_URL = "https://job-tracker-server-ln8r.onrender.com";
+
   const [activeTab, setActiveTab] = useState("All");
   const [applications, setApplications] = useState([]);
 
@@ -18,7 +19,7 @@ const Application = () => {
       setLoading(true);
       setError("");
 
-      const res = await fetch("http://localhost:8000/api/v1/applications");
+      const res = await fetch(`${BASE_URL}/api/v1/applications`);
       const data = await res.json();
 
       if (!data.success) {
@@ -26,7 +27,7 @@ const Application = () => {
         return;
       }
 
-      setApplications(data.applications);
+      setApplications(data.applications || []);
     } catch (err) {
       setError("Server not responding!");
     } finally {
@@ -38,11 +39,11 @@ const Application = () => {
     fetchApplications();
   }, []);
 
-  // Update status
+  // ✅ Update status
   const updateStatus = async (id, newStatus) => {
     try {
       const res = await fetch(
-        `https://job-tracker-server-ln8r.onrender.com/api/v1/applications/${id}/status`,
+        `${BASE_URL}/api/v1/applications/${id}/status`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -53,37 +54,36 @@ const Application = () => {
       const data = await res.json();
 
       if (!data.success) {
-        toast.error(data.message || "Failed to update status");
+        alert(data.message || "Failed to update status");
         return;
       }
 
       fetchApplications();
     } catch (err) {
-      toast.error("Server not responding!");
+      alert("Server not responding!");
     }
   };
 
-  // Delete application
+  // ✅ Delete application
   const deleteApplication = async (id) => {
     try {
-      const confirmDelete = confirm("Remove this application?");
+      const confirmDelete = window.confirm("Remove this application?");
       if (!confirmDelete) return;
 
-      const res = await fetch(
-        `https://job-tracker-server-ln8r.onrender.com/api/v1/applications/${id}`,
-        { method: "DELETE" }
-      );
+      const res = await fetch(`${BASE_URL}/api/v1/applications/${id}`, {
+        method: "DELETE",
+      });
 
       const data = await res.json();
 
       if (!data.success) {
-        toast.error(data.message || "Failed to delete application");
+        alert(data.message || "Failed to delete application");
         return;
       }
 
       fetchApplications();
     } catch (err) {
-      toast.error("Server not responding!");
+      alert("Server not responding!");
     }
   };
 
@@ -133,9 +133,10 @@ const Application = () => {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition
-                ${activeTab === tab
-                  ? "bg-blue-600 text-white"
-                  : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
+                ${
+                  activeTab === tab
+                    ? "bg-blue-600 text-white"
+                    : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
                 }`}
             >
               {tab}
