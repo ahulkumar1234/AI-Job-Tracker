@@ -66,7 +66,7 @@ const Home = () => {
 
             const skillsParam = customFilters.skills.join(",");
 
-            const url = ` https://job-tracker-server-ln8r.onrender.com/api/v1/jobs?what=${encodeURIComponent(
+            const url = `https://job-tracker-server-ln8r.onrender.com/api/v1/jobs?what=${encodeURIComponent(
                 customFilters.what || "developer"
             )}&where=${encodeURIComponent(
                 customFilters.where || "india"
@@ -104,9 +104,17 @@ const Home = () => {
 
     // HERO SEARCH 
     const handleSearch = () => {
+        const updatedFilters = {
+            ...filters,
+            what: filtersDraft.what,
+            where: filtersDraft.where,
+        };
+
+        setFilters(updatedFilters);   // applied filters update
         setPage(1);
-        fetchJobs(1, filters);
+        fetchJobs(1, updatedFilters); // same time correct filters se fetch
     };
+
 
     const handleNext = () => {
         const next = page + 1;
@@ -249,7 +257,7 @@ const Home = () => {
                             </div>
                         </div>
 
-                        {loading && <div className="text-gray-600 flex justify-center items-center w-full h-screen"><FadeLoader color="gray"/></div>}
+                        {loading && <div className="text-gray-600 flex justify-center items-center w-full h-screen"><FadeLoader color="gray" /></div>}
                         {error && <p className="text-red-600 font-medium">{error}</p>}
 
                         {!loading && !error && (
