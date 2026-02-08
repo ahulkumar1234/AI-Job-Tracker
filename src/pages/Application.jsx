@@ -42,7 +42,7 @@ const Application = () => {
   const updateStatus = async (id, newStatus) => {
     try {
       const res = await fetch(
-        ` https://job-tracker-server-ln8r.onrender.com/api/v1/applications/${id}/status`,
+        `https://job-tracker-server-ln8r.onrender.com/api/v1/applications/${id}/status`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -70,7 +70,7 @@ const Application = () => {
       if (!confirmDelete) return;
 
       const res = await fetch(
-        ` https://job-tracker-server-ln8r.onrender.com/api/v1/applications/${id}`,
+        `https://job-tracker-server-ln8r.onrender.com/api/v1/applications/${id}`,
         { method: "DELETE" }
       );
 
