@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
 
           {/* Brand */}
-          <div>L nk           <h2 className="text-xl font-bold text-gray-900 flex items-center">
+          <div><h2 className="text-xl font-bold text-gray-900 flex items-center">
             <BsSuitcaseLg className="text-blue-600 mr-2" />
             JobPilot <GoDotFill className="text-sm text-blue-500" />
           </h2>
