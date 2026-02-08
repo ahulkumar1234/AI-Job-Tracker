@@ -66,7 +66,7 @@ const Home = () => {
 
             const skillsParam = customFilters.skills.join(",");
 
-            const url = `http://localhost:8000/api/v1/jobs?what=${encodeURIComponent(
+            const url = ` https://job-tracker-server-ln8r.onrender.com/api/v1/jobs?what=${encodeURIComponent(
                 customFilters.what || "developer"
             )}&where=${encodeURIComponent(
                 customFilters.where || "india"

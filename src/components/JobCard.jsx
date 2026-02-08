@@ -11,7 +11,7 @@ const JobCard = ({ job }) => {
         try {
             setSaving(true);
 
-            const res = await fetch("http://localhost:8000/api/v1/applications", {
+            const res = await fetch(" https://job-tracker-server-ln8r.onrender.com/api/v1/applications", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

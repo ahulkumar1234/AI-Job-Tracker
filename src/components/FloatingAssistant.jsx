@@ -27,7 +27,7 @@ const FloatingAssistant = ({ setFilters, fetchJobs }) => {
         try {
             setLoading(true);
 
-            const res = await fetch("http://localhost:8000/api/v1/assistant", {
+            const res = await fetch(" https://job-tracker-server-ln8r.onrender.com/api/v1/assistant", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: userMsg }),

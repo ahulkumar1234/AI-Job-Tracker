@@ -18,7 +18,7 @@ const AddCv = () => {
   // ✅ Fetch uploaded resumes
   const fetchResumes = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/v1/resume");
+      const res = await fetch(" https://job-tracker-server-ln8r.onrender.com/api/v1/resume");
       const data = await res.json();
 
       if (data.success) {
@@ -78,7 +78,7 @@ const AddCv = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("http://localhost:8000/api/v1/resume/upload", {
+      const res = await fetch(" https://job-tracker-server-ln8r.onrender.com/api/v1/resume/upload", {
         method: "POST",
         body: formData,
       });
