@@ -15,22 +15,17 @@ const AddCv = () => {
 
   const [resumes, setResumes] = useState([]);
 
-  // ✅ Backend Base URL (Render)
-  const BASE_URL = "https://job-tracker-server-ln8r.onrender.com";
-
   // ✅ Fetch uploaded resumes
   const fetchResumes = async () => {
     try {
-      const res = await fetch(`${BASE_URL}/api/v1/resume`);
+      const res = await fetch("https://job-tracker-server-ln8r.onrender.com/api/v1/resume");
       const data = await res.json();
 
       if (data.success) {
         setResumes(data.resumes || []);
-      } else {
-        setResumes([]);
       }
     } catch (err) {
-      setResumes([]);
+      // ignore
     }
   };
 
@@ -38,7 +33,7 @@ const AddCv = () => {
     fetchResumes();
   }, []);
 
-  // ✅ File validate
+  // File validate
   const validateFile = (f) => {
     if (!f) return false;
 
@@ -48,7 +43,7 @@ const AddCv = () => {
       return false;
     }
 
-    // 5 MB limit
+    // 5 MB limit (optional)
     if (f.size > 5 * 1024 * 1024) {
       setError("File size should be under 5 MB!");
       setFile(null);
@@ -58,7 +53,7 @@ const AddCv = () => {
     return true;
   };
 
-  // ✅ When file selected
+  // When file selected
   const handleFileChange = (f) => {
     setMessage("");
     setError("");
@@ -68,7 +63,7 @@ const AddCv = () => {
     setFile(f);
   };
 
-  // ✅ Upload resume
+  // Upload resume
   const handleUpload = async () => {
     try {
       setLoading(true);
@@ -83,7 +78,7 @@ const AddCv = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch(`${BASE_URL}/api/v1/resume/upload`, {
+      const res = await fetch("https://job-tracker-server-ln8r.onrender.com/api/v1/resume/upload", {
         method: "POST",
         body: formData,
       });
@@ -95,13 +90,8 @@ const AddCv = () => {
         return;
       }
 
-      setMessage("✅ Resume uploaded successfully!");
+      setMessage("Resume uploaded successfully");
       setFile(null);
-
-      // ✅ reset file input
-      if (fileInputRef.current) {
-        fileInputRef.current.value = "";
-      }
 
       fetchResumes();
     } catch (err) {
@@ -114,20 +104,24 @@ const AddCv = () => {
   return (
     <div className="pt-24 px-4">
       <div className="max-w-6xl mx-auto">
+
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Resume Upload</h1>
           <p className="text-gray-600 mt-2">
-            Upload your resume (PDF). We will use it to calculate match score and
-            track applications.
+            Upload your resume (PDF). We will use it to calculate match score and track applications.
           </p>
         </div>
 
         {/* Upload Card */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
           {/* Upload Box */}
           <div className="lg:col-span-2 bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
-            <h2 className="text-lg font-bold text-gray-900">Upload Resume</h2>
+
+            <h2 className="text-lg font-bold text-gray-900">
+              Upload Resume
+            </h2>
             <p className="text-sm text-gray-600 mt-1">
               Supported format: PDF (max 5MB)
             </p>
@@ -186,10 +180,7 @@ const AddCv = () => {
                 </div>
 
                 <button
-                  onClick={() => {
-                    setFile(null);
-                    if (fileInputRef.current) fileInputRef.current.value = "";
-                  }}
+                  onClick={() => setFile(null)}
                   className="p-2 rounded-xl hover:bg-gray-100 transition cursor-pointer"
                 >
                   <MdOutlineDeleteOutline className="text-2xl text-gray-600" />
@@ -212,7 +203,6 @@ const AddCv = () => {
                   setFile(null);
                   setMessage("");
                   setError("");
-                  if (fileInputRef.current) fileInputRef.current.value = "";
                 }}
                 className="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-200 transition"
               >
@@ -247,7 +237,9 @@ const AddCv = () => {
 
         {/* Uploaded Resume */}
         <div className="mt-10">
-          <h2 className="text-xl font-bold text-gray-900">Uploaded Resumes</h2>
+          <h2 className="text-xl font-bold text-gray-900">
+            Uploaded Resumes
+          </h2>
 
           <div className="mt-4 space-y-3">
             {resumes.length === 0 ? (
@@ -271,7 +263,7 @@ const AddCv = () => {
 
                   <div className="flex items-center gap-2">
                     <Link
-                      href={r.fileUrl}
+                      to={r.fileUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="text-sm font-medium text-blue-600 hover:underline"
@@ -283,11 +275,13 @@ const AddCv = () => {
                       PDF
                     </span>
                   </div>
+
                 </div>
               ))
             )}
           </div>
         </div>
+
       </div>
     </div>
   );
