@@ -51,9 +51,9 @@ const JobCard = ({ job }) => {
                 </div>
 
                 {/* AI match score */}
-                {/* <span className="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">
+                <span className="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">
                     {job.matchScore ?? 0}% Match
-                </span> */}
+                </span>
 
             </div>
 
