@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaRegClock } from "react-icons/fa";
+import DotLoader from "react-spinners/DotLoader";
 
 const Application = () => {
   const BASE_URL = "https://job-tracker-server-ln8r.onrender.com";
@@ -145,7 +146,7 @@ const Application = () => {
         </div>
 
         {/* Loading */}
-        {loading && <p className="text-gray-600">Loading applications...</p>}
+        {loading && <div className="text-gray-600 w-full flex justify-center"><DotLoader color="blue" size={30}/></div>}
 
         {/* Error */}
         {error && <p className="text-red-600 font-medium">{error}</p>}

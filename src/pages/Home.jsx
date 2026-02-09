@@ -7,7 +7,7 @@ import { CiUser } from "react-icons/ci";
 import JobCard from "../components/JobCard";
 import FiltersSidebar from "../components/FiltersSidebar";
 import FloatingAssistant from "../components/FloatingAssistant";
-import FadeLoader from "react-spinners/FadeLoader";
+import DotLoader from "react-spinners/DotLoader";
 
 const Home = () => {
     const [jobs, setJobs] = useState([]);
@@ -67,7 +67,7 @@ const Home = () => {
             const skillsParam = customFilters.skills.join(",");
 
             const url = `https://job-tracker-server-ln8r.onrender.com/api/v1/jobs?what=${encodeURIComponent(
-                customFilters.what || "developer"
+                customFilters.what || "fullstack developer"
             )}&where=${encodeURIComponent(
                 customFilters.where || "india"
             )}&page=${customPage}&skills=${encodeURIComponent(
@@ -240,7 +240,7 @@ const Home = () => {
                                     onClick={handlePrev}
                                     disabled={page === 1}
                                     className={`px-4 py-2 rounded-xl text-sm font-medium transition
-                    ${page === 1
+                                        ${page === 1
                                             ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                                             : "bg-white border border-gray-200 hover:bg-gray-50"
                                         }`}
@@ -255,9 +255,9 @@ const Home = () => {
                                     Next →
                                 </button>
                             </div>
-                        </div>
+                        </div> 
 
-                        {loading && <div className="text-gray-600 flex justify-center items-center w-full h-screen"><FadeLoader color="gray" /></div>}
+                        {loading && <div className="text-gray-600 flex justify-center items-center w-full h-screen"><DotLoader color="blue" /></div>}
                         {error && <p className="text-red-600 font-medium">{error}</p>}
 
                         {!loading && !error && (
