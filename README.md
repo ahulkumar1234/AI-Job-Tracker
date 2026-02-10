@@ -23,6 +23,25 @@ This frontend allows users to:
 
 ---
 
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home Page](public/home)
+
+### 🤖 Jobs Sections
+![AI Review](public/jobs)
+
+### 🤖 Applications Sections
+![AI Review](public/applications)
+
+### 🤖 Upload CV
+![AI Review](public/cv)
+
+### 🤖 AI-Score for Resume
+![AI Review](public/ai-score)
+
+---
+
 ## 📌 Features
 
 ### ✅ Job Search
