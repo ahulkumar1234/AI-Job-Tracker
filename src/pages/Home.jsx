@@ -15,7 +15,6 @@ const Home = () => {
     const [error, setError] = useState("");
     const [page, setPage] = useState(1);
 
-    // ✅ APPLIED FILTERS (real filters used in API)
     const [filters, setFilters] = useState({
         what: "",
         where: "",
@@ -25,7 +24,6 @@ const Home = () => {
         workMode: "all",
     });
 
-    // ✅ DRAFT FILTERS (typing wala)
     const [filtersDraft, setFiltersDraft] = useState({
         what: "",
         where: "",
@@ -91,13 +89,11 @@ const Home = () => {
         }
     };
 
-    // ✅ AUTO FETCH whenever filters change (Hero + Sidebar + AI) 
     useEffect(() => {
         setPage(1);
         fetchJobs(1);
     }, []);
 
-    // ✅ First load 
     useEffect(() => {
         fetchJobs(1, filters);
     }, []);
@@ -257,7 +253,7 @@ const Home = () => {
                             </div>
                         </div> 
 
-                        {loading && <div className="text-gray-600 flex justify-center items-center w-full h-screen"><DotLoader color="blue" /></div>}
+                        {loading && <div className="text-gray-600 flex flex-col justify-center items-center w-full h-screen"><DotLoader color="blue" />Please wait...</div>}
                         {error && <p className="text-red-600 font-medium">{error}</p>}
 
                         {!loading && !error && (

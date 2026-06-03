@@ -14,7 +14,6 @@ const Application = () => {
 
   const tabs = ["All", "Applied", "Interview", "Offer", "Rejected"];
 
-  // ✅ Fetch applications from backend
   const fetchApplications = async () => {
     try {
       setLoading(true);
@@ -40,7 +39,6 @@ const Application = () => {
     fetchApplications();
   }, []);
 
-  // ✅ Update status
   const updateStatus = async (id, newStatus) => {
     try {
       const res = await fetch(
@@ -65,7 +63,6 @@ const Application = () => {
     }
   };
 
-  // ✅ Delete application
   const deleteApplication = async (id) => {
     try {
       const confirmDelete = window.confirm("Remove this application?");
